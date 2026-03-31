@@ -26,7 +26,8 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
-COPY --from=builder /app/start.sh ./start.sh
+COPY --from=builder /app/node_modules/@prisma/config ./node_modules/@prisma/config
+COPY --from=builder /app/node_modules/effect ./node_modules/effect
 
 RUN mkdir -p uploads && chown nextjs:nodejs uploads
 
@@ -36,4 +37,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["sh", "start.sh"]
+CMD ["sh", "-c", "node node_modules/prisma/build/index.js db push --schema=prisma/schema.prisma && node server.js"]
