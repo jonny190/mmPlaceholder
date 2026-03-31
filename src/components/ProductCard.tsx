@@ -4,13 +4,13 @@ import Image from "next/image";
 interface ProductCardProps {
   slug: string;
   name: string;
-  ref: string;
+  productRef: string;
   images: string[];
   category: string;
   availability: string;
 }
 
-export function ProductCard({ slug, name, ref, images, category, availability }: ProductCardProps) {
+export function ProductCard({ slug, name, productRef, images, category, availability }: ProductCardProps) {
   const imageUrl = images[0] || "/placeholder.svg";
 
   return (
@@ -25,7 +25,7 @@ export function ProductCard({ slug, name, ref, images, category, availability }:
         />
       </div>
       <div className="space-y-1">
-        <p className="text-xs text-[var(--muted)] uppercase tracking-wider">{category} &middot; {ref}</p>
+        <p className="text-xs text-[var(--muted)] uppercase tracking-wider">{category} &middot; {productRef}</p>
         <h3 className="text-sm font-medium leading-snug">{name}</h3>
         <p className="text-xs text-[var(--muted)]">{availability}</p>
       </div>
